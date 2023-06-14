@@ -1,3 +1,5 @@
+# 6411271 - LYNN THIT NYI NYI
+
 import re
 
 sentence = "I have so much fun. Yahoo! u6411271@au.edu lNyinyi22@gmail.com #computerscience #IT https://oshinokoo.com/manga/oshi-no-ko-chapter-71/ https://oshinokoo.com/manga/oshi-no-ko-chapter-72/"
@@ -22,6 +24,7 @@ def preproccsss_sentence(sentence):
     return [words, emails, urls, hashtags, ]
 
 words, emails, urls, hashtags,  = preproccsss_sentence(sentence)
+print(words, emails, urls, hashtags)
 
 with open("emails.txt", "w") as file:
     for each in emails:
