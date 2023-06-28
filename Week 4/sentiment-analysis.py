@@ -3,6 +3,8 @@ from collections import Counter
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import f1_score
+import matplotlib.pyplot as plt
 
 print(len(movie_reviews.fileids()))
 print(movie_reviews.categories())
@@ -40,7 +42,18 @@ model.fit(x_train_bow.toarray(), y_train)
 
 # Evaluation
 x_test_bow = count_vec.transform(x_test)
-model.predict(x_test_bow.toarray())
+y_pred = model.predict(x_test_bow.toarray())
 print(f"Model Score: {model.score(x_test_bow.toarray(), y_test)}")
 
+f1_score = f1_score(y_test,  y_pred, labels = movie_reviews.categories(), average='macro')
 
+print(f"F1 score: {f1_score}")
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+cm = confusion_matrix(y_test, y_pred, labels = movie_reviews.categories())
+print(cm)
+
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=movie_reviews.categories())
+
+disp.plot()
+plt.show()
