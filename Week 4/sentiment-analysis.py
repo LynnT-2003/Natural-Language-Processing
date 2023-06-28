@@ -16,3 +16,5 @@ print(len(documents))
 
 distribution = Counter([label for (words, label) in documents])
 print(distribution)
+
+train, test = train_test_split(documents, test_size=0.1,)
