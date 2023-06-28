@@ -1,7 +1,7 @@
 from nltk.corpus import movie_reviews
 from collections import Counter
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import f1_score
 import matplotlib.pyplot as plt
@@ -33,7 +33,7 @@ y_train = [label for (words, label) in train]
 y_test = [label for (words, label) in test]
 
 # Feature Extraction for Training
-count_vec = CountVectorizer()
+count_vec = CountVectorizer(min_df =10, token_pattern=r'[a-zA-Z]+')
 x_train_bow = count_vec.fit_transform(x_train)
 
 # Model Training
